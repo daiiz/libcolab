@@ -32,8 +32,8 @@ def run_search(queries, origin="", token=""):
                 "annoId": int(anno_id),
                 "desc": metadata["desc"],
             }
-            print(annotation_hint, phrase)
-            continue
+            annotation_hints.append(annotation_hint)
+            search_phrase.append(phrase)
         else:
             search_phrase.append(
                 {
@@ -44,7 +44,7 @@ def run_search(queries, origin="", token=""):
 
     payload = {
         "searchPhrase": search_phrase,
-        "annotationHints": [],
+        "annotationHints": annotation_hints,
         "paginateSkip": 0,
     }
 
