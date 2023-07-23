@@ -230,7 +230,11 @@ def show_annotations(items, origin="", style="query", indent=False):
 
 
 def show_chat(data, origin="", q=False, a=False):
-    print(data["chatId"])
+    chat_id = data["chatId"]
+    chat_uri = "{}/share/{}".format(origin, chat_id)
+    display(
+        HTML("<div><a href='{}' target='_blank'>{}</a></div>").format(chat_uri, chat_id)
+    )
     if q:
         query = []
         for item in data["qRaw"]:
@@ -259,6 +263,6 @@ def show_chat(data, origin="", q=False, a=False):
 
     display(
         HTML(
-            "<div data-name='spacer' style='{}' />".format("height: 24px; width: 1px;")
+            "<div data-name='spacer' style='{}' />".format("height: 40px; width: 1px;")
         )
     )
