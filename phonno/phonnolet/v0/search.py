@@ -47,6 +47,7 @@ def run_search(queries, origin="", token=""):
         "annotationHints": annotation_hints,
         "paginateSkip": 0,
     }
+    print(payload)
 
     r = requests.post(api_url, json=payload, headers=headers)
     if r.status_code == 200:
