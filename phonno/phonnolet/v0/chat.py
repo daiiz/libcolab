@@ -1,4 +1,4 @@
-import requests
+import urllib, requests
 
 
 def similar_with(queries, topk=5, origin="", token=""):
@@ -12,7 +12,7 @@ def similar_with(queries, topk=5, origin="", token=""):
         return []
     api_url = "{}/api/chat/similar?q={}&limit={}".format(
         origin,
-        " ".join(qs),
+        urllib.parse.quote(" ".join(qs)),
         topk,
     )
     print(api_url)
