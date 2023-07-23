@@ -14,10 +14,13 @@ def run_search(queries, origin="", token=""):
     }
 
     search_phrase = []
-    for q in queries:
+    for [idx, q] in enumerate(queries):
         if isinstance(q, list):
+            if len(q) != 3 or (not "text" in q[2]) or (not "desc" in q[2]):
+                continue
+            [image_id, anno_id, metadata] = q
+            print(idx, image_id, anno_id, metadata)
             continue
-            # search_phrase.append({"imageId": q[0], "annoId": q[1]})
         else:
             search_phrase.append(
                 {
