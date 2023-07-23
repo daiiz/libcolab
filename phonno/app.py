@@ -24,7 +24,7 @@ def get_token(drive_root_name, colab_name):
                 "gcloud",
                 "auth",
                 "activate-service-account",
-                "--key-file={}".fromat(key_file_path),
+                "--key-file={}".format(key_file_path),
             ]
         )
     )
