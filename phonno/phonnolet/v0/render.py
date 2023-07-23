@@ -170,9 +170,11 @@ def show_annotations(items, origin="", style="query", indent=False):
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
     for idx, item in enumerate(items):
+        if isinstance(item, list) and len(item) == 2:
+            item.append({})
         if style == "query":
             if isinstance(item, list):
-                [image_id, anno_id] = item
+                [image_id, anno_id, metadata] = item
                 url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
@@ -187,7 +189,7 @@ def show_annotations(items, origin="", style="query", indent=False):
         elif style == "result":
             if not isinstance(item, list):
                 continue
-            [image_id, anno_id] = item
+            [image_id, anno_id, metadata] = item
             url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
             img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                 origin, image_id, str(anno_id)
