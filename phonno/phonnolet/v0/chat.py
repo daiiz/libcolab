@@ -7,7 +7,13 @@ def similar_with(queries, topk=5, origin="", token=""):
     qs = []
     for q in queries:
         if isinstance(q, list):
-            print("WIP:", q)
+            if len(q) != 3 or (not "text" in q[2]) or (not "desc" in q[2]):
+                continue
+            [_, _, metadata] = q
+            # metadata["desc"]またはmetadata["text"]を使って検索する
+            q_str = metadata["desc"] if "desc" in metadata else metadata["text"]
+            print("WIP:", q, q_str)
+            # qs.append(q_str.strip())
             continue
         else:
             qs.append(q.strip())
