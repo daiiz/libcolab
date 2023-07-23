@@ -19,12 +19,14 @@ def get_token(drive_root_name, colab_name):
         aud = fp.readline()
 
     res = run_command(
-        [
-            "gcloud",
-            "auth",
-            "activate-service-account",
-            "--key-file={}".fromat(key_file_path),
-        ].join(" ")
+        " ".join(
+            [
+                "gcloud",
+                "auth",
+                "activate-service-account",
+                "--key-file={}".fromat(key_file_path),
+            ]
+        )
     )
     print(res)
 
