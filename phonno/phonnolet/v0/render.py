@@ -49,13 +49,15 @@ def _get_anno_img_style(type):
         )
 
 
-def _get_anno_container_style(type):
+def _get_anno_container_style(type, indent):
+    margin_left = "24px" if indent else "0px"
     if type == "query":
         return transform_to_style_attr(
             {
                 "display": "flex",
                 "gap": "4px",
                 "align-items": "flex-end",
+                "margin-left": margin_left,
             }
         )
     elif type == "result":
@@ -69,6 +71,7 @@ def _get_anno_container_style(type):
                 "height": "auto",
                 "margin-top": 0,
                 "gap": "2px",
+                "margin-left": margin_left,
             }
         )
 
@@ -144,8 +147,8 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
         )
 
 
-def show_annotations(items, origin="", style="query"):
-    root_style = _get_anno_container_style(style)
+def show_annotations(items, origin="", style="query", indent=False):
+    root_style = _get_anno_container_style(style, indent)
     img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
     html_lines = []
@@ -219,6 +222,6 @@ def show_chat(data, origin="", q=False, a=False):
                 query.append([item["imageId"], int(item["annoId"])])
             elif item["type"] == "text":
                 query.append(item["text"])
-        show_annotations(query, origin=origin, style="query")
+        show_annotations(query, origin=origin, style="query", indent=True)
     if a:
         pass
