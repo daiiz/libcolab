@@ -15,7 +15,7 @@ def similar_with(queries, topk=5, origin="", token=""):
         else:
             qs.append(q.strip())
     if len(qs) == 0:
-        return []
+        return [], []
     api_url = "{}/api/chat/similar?q={}&limit={}".format(
         origin,
         urllib.parse.quote(" ".join(qs)),
@@ -30,6 +30,6 @@ def similar_with(queries, topk=5, origin="", token=""):
     res = requests.get(api_url, headers=headers)
     if res.status_code == 200:
         data = res.json()
-        return data["activities"]
+        return data["activities"], qs
     else:
         raise Exception("Error: {}".format(r.status_code))
