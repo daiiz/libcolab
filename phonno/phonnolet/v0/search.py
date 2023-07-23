@@ -26,7 +26,6 @@ def run_search(queries, origin="", token=""):
                 }
             )
 
-    # POST
     payload = {
         "searchPhrase": search_phrase,
         "annotationHints": [],
