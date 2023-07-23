@@ -35,6 +35,13 @@ def run_search(queries, origin="", token=""):
 
     r = requests.post(api_url, json=payload, headers=headers)
     if r.status_code == 200:
-        return r.json()
+        data = r.json()
+        annos = []  # annotationsをクエリとして渡せる形式に変換したもの
+        for anno in data["annotations"]:
+            annos.append([anno["imageId"], int(anno["annoId"])])
+        return {
+            "annotations": data["annotations"],
+            "annos": annos,
+        }
     else:
         raise Exception("Error: {}".format(r.status_code))
