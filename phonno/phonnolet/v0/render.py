@@ -146,7 +146,7 @@ def get_anno_anchor_content_image_background_style(type, img_url):
                 "background-size": "cover",
                 "background-position": "center center",
                 "background-repeat": "no-repeat",
-                "background-image": 'url("{}")'.format(img_url),
+                "background-image": "url('{}')".format(img_url),
             }
         )
     return ""
