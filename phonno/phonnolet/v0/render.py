@@ -1,2 +1,2 @@
-def show_annotations(args):
-    print(args)
+def show_annotations(args, style="query"):
+    print(args, style)
