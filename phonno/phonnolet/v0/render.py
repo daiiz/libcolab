@@ -9,7 +9,7 @@ def transform_to_style_attr(style_object):
     return style.strip()
 
 
-def get_anno_txt_style(type):
+def _get_anno_txt_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -147,7 +147,7 @@ def get_anno_anchor_content_image_background_style(type, img_url):
 def show_annotations(items, origin="", style="query"):
     root_style = get_anno_container_style(style)
     img_style = get_anno_img_style(style)
-    txt_style = get_anno_txt_style(style)
+    txt_style = _get_anno_txt_style(style)
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
     for idx, item in enumerate(items):
