@@ -1,5 +1,3 @@
-import IPython
-from IPython.display import HTML
 import IPython.display
 
 
@@ -229,14 +227,16 @@ def show_annotations(items, origin="", style="query", indent=False):
             html_lines.append("</div>")  # 0
     html_lines.append("</div>")
     html_str = "".join(html_lines)
-    IPython.display.display(HTML(html_str))
+    IPython.display.display(IPython.display.HTML(html_str))
 
 
 def show_chat(data, origin="", q=False, a=False):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     IPython.display.display(
-        HTML("<div><a href='{}' target='_blank'>{}</a></div>".format(chat_uri, chat_id))
+        IPython.display.HTML(
+            "<div><a href='{}' target='_blank'>{}</a></div>".format(chat_uri, chat_id)
+        )
     )
     if q:
         query = []
@@ -256,7 +256,7 @@ def show_chat(data, origin="", q=False, a=False):
         html_lines.append("<div>{}</div>".format(data["aRaw"]))
         html_lines.append("</div>")
         html_str = "".join(html_lines)
-        IPython.display.display(HTML(html_str))
+        IPython.display.display(IPython.display.HTML(html_str))
 
         annos = []
         for annoKey in data["hitDocs"].keys():
@@ -265,7 +265,7 @@ def show_chat(data, origin="", q=False, a=False):
         show_annotations(annos, origin=origin, style="result", indent=True)
 
     IPython.display.display(
-        HTML(
+        IPython.display.HTML(
             "<div data-name='spacer' style='{}' />".format("height: 40px; width: 1px;")
         )
     )
