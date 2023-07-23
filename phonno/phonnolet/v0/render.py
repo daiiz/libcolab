@@ -50,14 +50,17 @@ def _get_anno_img_style(type):
 
 
 def _get_anno_container_style(type, indent):
-    margin_left = "24px" if indent else "0px"
+    margin_l = "24px" if indent else "0px"
+    margin_tb = "4px" if indent else "0px"
     if type == "query":
         return transform_to_style_attr(
             {
                 "display": "flex",
                 "gap": "4px",
                 "align-items": "flex-end",
-                "margin-left": margin_left,
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
             }
         )
     elif type == "result":
@@ -69,9 +72,10 @@ def _get_anno_container_style(type, indent):
                 "grid-auto-rows": "1fr",
                 "grid-template-columns": "repeat(10,minmax(0,1fr))",
                 "height": "auto",
-                "margin-top": 0,
                 "gap": "2px",
-                "margin-left": margin_left,
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
             }
         )
 
@@ -224,4 +228,4 @@ def show_chat(data, origin="", q=False, a=False):
                 query.append(item["text"])
         show_annotations(query, origin=origin, style="query", indent=True)
     if a:
-        pass
+        annos = []
