@@ -1,2 +1,2 @@
-def load_single_text(msg = "hello"):
+def load_single_text(msg):
   print(msg)
