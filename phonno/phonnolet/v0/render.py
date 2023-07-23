@@ -229,7 +229,7 @@ def show_chat(data, origin="", q=False, a=False):
         show_annotations(query, origin=origin, style="query", indent=True)
     if a:
         annos = []
-        for annoKey in keys(data["hitDocs"]):
+        for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
         show_annotations(annos, origin=origin, style="result", indent=True)
