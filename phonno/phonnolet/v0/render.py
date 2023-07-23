@@ -233,7 +233,7 @@ def show_chat(data, origin="", q=False, a=False):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     display(
-        HTML("<div><a href='{}' target='_blank'>{}</a></div>").format(chat_uri, chat_id)
+        HTML("<div><a href='{}' target='_blank'>{}</a></div>".format(chat_uri, chat_id))
     )
     if q:
         query = []
