@@ -9,7 +9,7 @@ def transform_to_style_attr(style_object):
     return style.strip()
 
 
-def get_anno_txt_style(type):
+def _get_anno_txt_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -19,7 +19,7 @@ def get_anno_txt_style(type):
         )
 
 
-def get_anno_img_style(type):
+def _get_anno_img_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -49,13 +49,18 @@ def get_anno_img_style(type):
         )
 
 
-def get_anno_container_style(type):
+def _get_anno_container_style(type, indent):
+    margin_l = "24px" if indent else "0px"
+    margin_tb = "4px" if indent else "0px"
     if type == "query":
         return transform_to_style_attr(
             {
                 "display": "flex",
                 "gap": "4px",
                 "align-items": "flex-end",
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
             }
         )
     elif type == "result":
@@ -67,13 +72,27 @@ def get_anno_container_style(type):
                 "grid-auto-rows": "1fr",
                 "grid-template-columns": "repeat(10,minmax(0,1fr))",
                 "height": "auto",
-                "margin-top": 0,
                 "gap": "2px",
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
+            }
+        )
+    elif type == "text":
+        return transform_to_style_attr(
+            {
+                "display": "block",
+                "width": "100%",
+                "max-width": "1000px",
+                "padding": "8px 0",
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
             }
         )
 
 
-def get_anno_anchor_style(type):
+def _get_anno_anchor_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -87,7 +106,7 @@ def get_anno_anchor_style(type):
         )
 
 
-def get_anno_anchor_content_style(type):
+def _get_anno_anchor_content_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -99,7 +118,7 @@ def get_anno_anchor_content_style(type):
         )
 
 
-def get_anno_anchor_content_image_style(type):
+def _get_anno_anchor_content_image_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -113,7 +132,7 @@ def get_anno_anchor_content_image_style(type):
         )
 
 
-def get_anno_anchor_content_image_wrap_style(type):
+def _get_anno_anchor_content_image_wrap_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -124,7 +143,7 @@ def get_anno_anchor_content_image_wrap_style(type):
         )
 
 
-def get_anno_anchor_content_image_background_style(type, img_url):
+def _get_anno_anchor_content_image_background_style(type, img_url):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -144,13 +163,13 @@ def get_anno_anchor_content_image_background_style(type, img_url):
         )
 
 
-def show_annotations(items, origin="", style="query"):
-    root_style = get_anno_container_style(style)
-    img_style = get_anno_img_style(style)
-    txt_style = get_anno_txt_style(style)
+def show_annotations(items, origin="", style="query", indent=False):
+    root_style = _get_anno_container_style(style, indent)
+    img_style = _get_anno_img_style(style)
+    txt_style = _get_anno_txt_style(style)
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
-    for item in items:
+    for idx, item in enumerate(items):
         if style == "query":
             if isinstance(item, list):
                 [image_id, anno_id] = item
@@ -176,24 +195,24 @@ def show_annotations(items, origin="", style="query"):
 
             html_lines.append("<div data-name='annotation'>")  # 0
             html_lines.append(
-                "<a href='{}' style='{}' target='_blank'>".format(
-                    url, get_anno_anchor_style(style)
+                "<a href='{}' style='{}' title='{}' target='_blank'>".format(
+                    url, _get_anno_anchor_style(style), idx
                 )
             )
             html_lines.append(
-                "<div style='{}'>".format(get_anno_anchor_content_style(style))
+                "<div style='{}'>".format(_get_anno_anchor_content_style(style))
             )  # 1
             html_lines.append(
-                "<div style='{}'>".format(get_anno_anchor_content_image_style(style))
+                "<div style='{}'>".format(_get_anno_anchor_content_image_style(style))
             )  # 2
             html_lines.append(
                 "<div style='{}'>".format(
-                    get_anno_anchor_content_image_wrap_style(style)
+                    _get_anno_anchor_content_image_wrap_style(style)
                 )
             )  # 3
             html_lines.append(
                 "<div style='{}'>".format(
-                    get_anno_anchor_content_image_background_style(style, img_url)
+                    _get_anno_anchor_content_image_background_style(style, img_url)
                 )
             )  # 4
             html_lines.append("</div>")  # 4
@@ -208,3 +227,42 @@ def show_annotations(items, origin="", style="query"):
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     display(HTML(html_str))
+
+
+def show_chat(data, origin="", q=False, a=False):
+    chat_id = data["chatId"]
+    chat_uri = "{}/share/{}".format(origin, chat_id)
+    display(
+        HTML("<div><a href='{}' target='_blank'>{}</a></div>".format(chat_uri, chat_id))
+    )
+    if q:
+        query = []
+        for item in data["qRaw"]:
+            if item["type"] == "annotation":
+                query.append([item["imageId"], int(item["annoId"])])
+            elif item["type"] == "text":
+                query.append(item["text"])
+        show_annotations(query, origin=origin, style="query", indent=True)
+    if a:
+        html_lines = []
+        html_lines.append(
+            "<div data-name='text' style='{}'>".format(
+                _get_anno_container_style("text", indent=True)
+            )
+        )
+        html_lines.append("<div>{}</div>".format(data["aRaw"]))
+        html_lines.append("</div>")
+        html_str = "".join(html_lines)
+        display(HTML(html_str))
+
+        annos = []
+        for annoKey in data["hitDocs"].keys():
+            anno = data["hitDocs"][annoKey]
+            annos.append([anno["imageId"], int(anno["annoId"])])
+        show_annotations(annos, origin=origin, style="result", indent=True)
+
+    display(
+        HTML(
+            "<div data-name='spacer' style='{}' />".format("height: 40px; width: 1px;")
+        )
+    )
