@@ -39,8 +39,20 @@ def get_anno_img_style(type):
     return ""
 
 
+def get_anno_container_style(type):
+    if type == "query":
+        return transform_to_style_attr(
+            {
+                "display": "flex",
+                "gap": "4px",
+                "align-items": "flex-end",
+            }
+        )
+    return ""
+
+
 def show_annotations(items, origin="", style="query"):
-    root_style = "display:flex; gap:4px; align-items:flex-end;"
+    root_style = get_anno_container_style(style)
     img_style = get_anno_img_style(style)
     txt_style = get_anno_tet_style(style)
     html_lines = []
