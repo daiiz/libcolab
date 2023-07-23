@@ -78,6 +78,18 @@ def _get_anno_container_style(type, indent):
                 "margin-bottom": margin_tb,
             }
         )
+    elif type == "text":
+        return transform_to_style_attr(
+            {
+                "display": "block",
+                "width": "100%",
+                "max-width": "1000px",
+                "padding": "8px 0",
+                "margin-left": margin_l,
+                "margin-top": margin_tb,
+                "margin-bottom": margin_tb,
+            }
+        )
 
 
 def _get_anno_anchor_style(type):
@@ -228,6 +240,15 @@ def show_chat(data, origin="", q=False, a=False):
                 query.append(item["text"])
         show_annotations(query, origin=origin, style="query", indent=True)
     if a:
+        html_lines = []
+        html_lines.append(
+            "<div data-name='texts' style='{}'>".format(
+                _get_anno_container_style("text", indent)
+            )
+        )
+        html_lines.append("<div>{}</div>".format(data["aRaw"]))
+        html_lines.append("</div>")
+
         annos = []
         for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
