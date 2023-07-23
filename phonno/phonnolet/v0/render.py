@@ -1,3 +1,7 @@
+import IPython
+from IPython.display import display, HTML
+
+
 def transform_to_style_attr(style_object):
     style = ""
     for key, value in style_object.items():
@@ -55,8 +59,9 @@ def show_annotations(items, origin="", style="query"):
         else:
             html_lines.append("<div style='{}'>{}</div>".format(txt_style, item))
     html_lines.append("</div>")
-    print("\n".join(html_lines))
+    html_str = "".join(html_lines)
+    display(HTML(html_str))
+    return html_str
 
 
-# print(transform_to_style_attr({"a": 1, "b": 2}))
 # show_annotations([], origin="", style="query")
