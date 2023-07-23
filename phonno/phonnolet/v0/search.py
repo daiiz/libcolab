@@ -14,12 +14,25 @@ def run_search(queries, origin="", token=""):
     }
 
     search_phrase = []
+    annotation_hints = []
     for [idx, q] in enumerate(queries):
         if isinstance(q, list):
             if len(q) != 3 or (not "text" in q[2]) or (not "desc" in q[2]):
                 continue
             [image_id, anno_id, metadata] = q
-            print(idx, image_id, anno_id, metadata)
+            annotation_hint = {
+                "imageId": image_id,
+                "annoId": str(anno_id),
+                "queryIndex": idx,
+                "text": metadata["text"],
+            }
+            phrase = {
+                "type": "annotation",
+                "imageId": image_id,
+                "annoId": str(anno_id),
+                "desc": metadata["desc"],
+            }
+            print(idx, image_id, anno_id, "|", annotation_hint, phrase)
             continue
         else:
             search_phrase.append(
