@@ -210,5 +210,15 @@ def show_annotations(items, origin="", style="query"):
     display(HTML(html_str))
 
 
-def show_chat(data, q=False, a=False):
-    print(data)
+def show_chat(data, origin="", q=False, a=False):
+    print(data["chatId"])
+    if q:
+        query = []
+        for item in data["qRaw"]:
+            if item["type"] == "annotation":
+                query.append([item["imageId"], int(item["annoId"])])
+            elif item["type"] == "text":
+                query.append(item["text"])
+        show_annotations(query, origin=origin, style="query")
+    if a:
+        pass
