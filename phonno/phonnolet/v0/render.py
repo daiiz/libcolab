@@ -256,3 +256,5 @@ def show_chat(data, origin="", q=False, a=False):
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
         show_annotations(annos, origin=origin, style="result", indent=True)
+
+    display(HTML("<div data-name='spacer' style='{}' />".format("height: 24px;")))
