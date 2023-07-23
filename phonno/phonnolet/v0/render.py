@@ -74,6 +74,3 @@ def show_annotations(items, origin="", style="query"):
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     display(HTML(html_str))
-
-
-# show_annotations([], origin="", style="query")
