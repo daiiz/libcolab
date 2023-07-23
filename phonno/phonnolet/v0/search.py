@@ -37,7 +37,11 @@ def run_search(queries, origin="", token=""):
         data = r.json()
         annos = []  # annotationsをクエリとして渡せる形式に変換したもの
         for anno in data["annotations"]:
-            annos.append([anno["imageId"], int(anno["annoId"])])
+            metadata = {
+                "text": anno["text"],
+                "desc": anno["desc"],
+            }
+            annos.append([anno["imageId"], int(anno["annoId"]), metadata])
         return {
             "annotations": data["annotations"],
             "annos": annos,
