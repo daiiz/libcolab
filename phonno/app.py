@@ -17,4 +17,14 @@ def get_token(drive_root_name, colab_name):
     aud = ""
     with open("{0}/client_id.txt".format(base_dir), "r") as fp:
         aud = fp.readline()
-    print("...", aud)
+
+    run_command(
+        [
+            "gcloud",
+            "auth",
+            "activate-service-account",
+            "--key-file={}".fromat(key_file_path),
+        ]
+    )
+
+    print("aud:", aud)
