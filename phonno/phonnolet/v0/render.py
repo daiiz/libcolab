@@ -5,7 +5,18 @@ def transform_to_style_attr(style_object):
     return style.strip()
 
 
-def get_anno_style(type):
+def get_anno_tet_style(type):
+    if type == "query":
+        return transform_to_style_attr(
+            {
+                "display": "inline-block",
+                "margin": "3px",
+            }
+        )
+    return ""
+
+
+def get_anno_img_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -24,10 +35,28 @@ def get_anno_style(type):
     return ""
 
 
-def show_annotations(args, style="query"):
-    img_style = get_anno_style(style)
-    print(args, img_style)
+def show_annotations(items, origin="", style="query"):
+    img_style = get_anno_img_style(style)
+    txt_style = get_anno_tet_style(style)
+    html_lines = []
+    html_lines.append("<div data-name='annotations'>")
+    for item in items:
+        if isinstance(item, list):
+            [image_id, anno_id] = item
+            url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+            img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
+                origin, image_id, str(anno_id)
+            )
+            html_lines.append(
+                "<a href='{}' target='_blank'><img src='{}' style='{}' /></a>".format(
+                    url, img_url, img_style
+                )
+            )
+        else:
+            html_lines.append("<div style='{}'>{}</div>".format(txt_style, item))
+    html_lines.append("</div>")
+    print("\n".join(html_lines))
 
 
 # print(transform_to_style_attr({"a": 1, "b": 2}))
-show_annotations([], "query")
+# show_annotations([], origin="", style="query")
