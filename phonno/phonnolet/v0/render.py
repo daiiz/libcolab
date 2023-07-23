@@ -64,6 +64,8 @@ def get_anno_container_style(type):
         return transform_to_style_attr(
             {
                 "display": "grid",
+                "width": "100%",
+                "max-width": "1000px",
                 "grid-auto-rows": "1fr",
                 "grid-template-columns": "repeat(10,minmax(0,1fr))",
                 "height": "auto",
