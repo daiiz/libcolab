@@ -6,11 +6,6 @@ def run_command(command):
     return completed_process.stdout.decode("utf-8")  # return output as string
 
 
-def sample5(msg):
-    print(msg)
-    print(run_command("ls -l"))
-
-
 def get_token(drive_root_name, colab_name):
     base_dir = "/content/drive/MyDrive/{0}/{1}".format(drive_root_name, colab_name)
     key_file_path = "{0}/cred.json".format(base_dir)
@@ -35,5 +30,4 @@ def get_token(drive_root_name, colab_name):
         )
     )
 
-    print("aud:", aud)
-    return token
+    return token.strip()
