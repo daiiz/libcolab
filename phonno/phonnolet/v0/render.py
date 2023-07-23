@@ -17,7 +17,6 @@ def get_anno_txt_style(type):
                 "margin": "3px 0",
             }
         )
-    return ""
 
 
 def get_anno_img_style(type):
@@ -48,7 +47,6 @@ def get_anno_img_style(type):
                 "opacity": 1,
             }
         )
-    return ""
 
 
 def get_anno_container_style(type):
@@ -73,7 +71,6 @@ def get_anno_container_style(type):
                 "gap": "2px",
             }
         )
-    return ""
 
 
 def get_anno_anchor_style(type):
@@ -88,7 +85,6 @@ def get_anno_anchor_style(type):
                 "text-decoration": "none",
             }
         )
-    return ""
 
 
 def get_anno_anchor_content_style(type):
@@ -101,7 +97,6 @@ def get_anno_anchor_content_style(type):
                 "padding-bottom": "100%",
             }
         )
-    return ""
 
 
 def get_anno_anchor_content_image_style(type):
@@ -116,7 +111,6 @@ def get_anno_anchor_content_image_style(type):
                 "border-radius": "1px",
             }
         )
-    return ""
 
 
 def get_anno_anchor_content_image_wrap_style(type):
@@ -128,7 +122,6 @@ def get_anno_anchor_content_image_wrap_style(type):
                 "height": "100%",
             }
         )
-    return ""
 
 
 def get_anno_anchor_content_image_background_style(type, img_url):
@@ -149,7 +142,6 @@ def get_anno_anchor_content_image_background_style(type, img_url):
                 "background-image": "url({})".format(img_url),
             }
         )
-    return ""
 
 
 def show_annotations(items, origin="", style="query"):
