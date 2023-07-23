@@ -206,5 +206,5 @@ def show_annotations(items, origin="", style="query"):
             html_lines.append("</a>")
             html_lines.append("</div>")  # 0
     html_lines.append("</div>")
-    html_str = "\n".join(html_lines)
+    html_str = "".join(html_lines)
     display(HTML(html_str))
