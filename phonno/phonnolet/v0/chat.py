@@ -27,5 +27,5 @@ def similar_with(queries, topk=5, origin="", token=""):
     if res.status_code == 200:
         data = res.json()
         return data["activities"]
-
-    return []
+    else:
+        raise Exception("Error: {}".format(r.status_code))
