@@ -19,7 +19,7 @@ def _get_anno_txt_style(type):
         )
 
 
-def get_anno_img_style(type):
+def _get_anno_img_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -49,7 +49,7 @@ def get_anno_img_style(type):
         )
 
 
-def get_anno_container_style(type):
+def _get_anno_container_style(type):
     if type == "query":
         return transform_to_style_attr(
             {
@@ -73,7 +73,7 @@ def get_anno_container_style(type):
         )
 
 
-def get_anno_anchor_style(type):
+def _get_anno_anchor_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -87,7 +87,7 @@ def get_anno_anchor_style(type):
         )
 
 
-def get_anno_anchor_content_style(type):
+def _get_anno_anchor_content_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -99,7 +99,7 @@ def get_anno_anchor_content_style(type):
         )
 
 
-def get_anno_anchor_content_image_style(type):
+def _get_anno_anchor_content_image_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -113,7 +113,7 @@ def get_anno_anchor_content_image_style(type):
         )
 
 
-def get_anno_anchor_content_image_wrap_style(type):
+def _get_anno_anchor_content_image_wrap_style(type):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -124,7 +124,7 @@ def get_anno_anchor_content_image_wrap_style(type):
         )
 
 
-def get_anno_anchor_content_image_background_style(type, img_url):
+def _get_anno_anchor_content_image_background_style(type, img_url):
     if type == "result":
         return transform_to_style_attr(
             {
@@ -145,8 +145,8 @@ def get_anno_anchor_content_image_background_style(type, img_url):
 
 
 def show_annotations(items, origin="", style="query"):
-    root_style = get_anno_container_style(style)
-    img_style = get_anno_img_style(style)
+    root_style = _get_anno_container_style(style)
+    img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
@@ -177,23 +177,23 @@ def show_annotations(items, origin="", style="query"):
             html_lines.append("<div data-name='annotation'>")  # 0
             html_lines.append(
                 "<a href='{}' style='{}' title='{}' target='_blank'>".format(
-                    url, get_anno_anchor_style(style), idx
+                    url, _get_anno_anchor_style(style), idx
                 )
             )
             html_lines.append(
-                "<div style='{}'>".format(get_anno_anchor_content_style(style))
+                "<div style='{}'>".format(_get_anno_anchor_content_style(style))
             )  # 1
             html_lines.append(
-                "<div style='{}'>".format(get_anno_anchor_content_image_style(style))
+                "<div style='{}'>".format(_get_anno_anchor_content_image_style(style))
             )  # 2
             html_lines.append(
                 "<div style='{}'>".format(
-                    get_anno_anchor_content_image_wrap_style(style)
+                    _get_anno_anchor_content_image_wrap_style(style)
                 )
             )  # 3
             html_lines.append(
                 "<div style='{}'>".format(
-                    get_anno_anchor_content_image_background_style(style, img_url)
+                    _get_anno_anchor_content_image_background_style(style, img_url)
                 )
             )  # 4
             html_lines.append("</div>")  # 4
