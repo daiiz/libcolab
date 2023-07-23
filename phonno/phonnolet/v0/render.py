@@ -146,23 +146,7 @@ def get_anno_anchor_content_image_background_style(type, img_url):
                 "background-size": "cover",
                 "background-position": "center center",
                 "background-repeat": "no-repeat",
-                "background-image": "url('{}')".format(img_url),
-            }
-        )
-    return ""
-
-
-def get_anno_anchor_content_image_front_style(type, img_url):
-    if type == "result":
-        return transform_to_style_attr(
-            {
-                "position": "absolute",
-                "object-fit": "contain",
-                "width": "100%",
-                "height": "100%",
-                "user-select": "none",
-                "z-index": 999,
-                "opacity": 1,
+                "background-image": 'url("{}")'.format(img_url),
             }
         )
     return ""
@@ -216,7 +200,7 @@ def show_annotations(items, origin="", style="query"):
                 )
             )  # 3
             html_lines.append(
-                "<div style='{}'>".format(
+                '<div style="{}">'.format(
                     get_anno_anchor_content_image_background_style(style, img_url)
                 )
             )  # 4
