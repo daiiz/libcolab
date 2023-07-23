@@ -7,6 +7,7 @@ def similar_with(queries, topk=5, origin="", token=""):
     qs = []
     for q in queries:
         if isinstance(q, list):
+            print("WIP:", q)
             continue
         else:
             qs.append(q.strip())
