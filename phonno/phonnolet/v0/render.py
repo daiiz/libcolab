@@ -92,7 +92,7 @@ def get_anno_anchor_content_style(type):
         return transform_to_style_attr(
             {
                 "display": "block",
-                "content": "",
+                "content": '""',
                 "width": 0,
                 "padding-bottom": "100%",
             }
