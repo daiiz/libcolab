@@ -58,19 +58,20 @@ def show_annotations(items, origin="", style="query"):
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
     for item in items:
-        if isinstance(item, list):
-            [image_id, anno_id] = item
-            url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
-            img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
-                origin, image_id, str(anno_id)
-            )
-            html_lines.append(
-                "<a href='{}' target='_blank'><img src='{}' style='{}' /></a>".format(
-                    url, img_url, img_style
+        if style == "query":
+            if isinstance(item, list):
+                [image_id, anno_id] = item
+                url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+                img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
+                    origin, image_id, str(anno_id)
                 )
-            )
-        else:
-            html_lines.append("<div style='{}'>{}</div>".format(txt_style, item))
+                html_lines.append(
+                    "<a href='{}' target='_blank'><img src='{}' style='{}' /></a>".format(
+                        url, img_url, img_style
+                    )
+                )
+            else:
+                html_lines.append("<div style='{}'>{}</div>".format(txt_style, item))
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     display(HTML(html_str))
