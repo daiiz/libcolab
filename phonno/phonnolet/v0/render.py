@@ -73,7 +73,8 @@ def show_annotations(items, origin="", style="query"):
             else:
                 html_lines.append("<div style='{}'>{}</div>".format(txt_style, item))
         elif style == "result":
-            pass
+            if not isinstance(item, list):
+                continue
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     display(HTML(html_str))
