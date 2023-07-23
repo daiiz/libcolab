@@ -2,6 +2,8 @@ import urllib, requests
 
 
 def similar_with(queries, topk=5, origin="", token=""):
+    if not token:
+        raise Exception("No token provided")
     qs = []
     for q in queries:
         if isinstance(q, list):
@@ -15,4 +17,15 @@ def similar_with(queries, topk=5, origin="", token=""):
         urllib.parse.quote(" ".join(qs)),
         topk,
     )
-    print(api_url)
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer " + token,
+    }
+
+    res = requests.get(api_url, headers=headers)
+    if res.status_code == 200:
+        data = res.json()
+        return data["activities"]
+
+    return []
