@@ -14,6 +14,7 @@ def get_anno_tet_style(type):
         return transform_to_style_attr(
             {
                 "display": "inline-block",
+                "margin": "3px 0",
             }
         )
     return ""
@@ -39,10 +40,11 @@ def get_anno_img_style(type):
 
 
 def show_annotations(items, origin="", style="query"):
+    root_style = "display:flex; gap:4px; align-items:flex-end;"
     img_style = get_anno_img_style(style)
     txt_style = get_anno_tet_style(style)
     html_lines = []
-    html_lines.append("<div data-name='annotations' style='display:flex;gap:4px;'>")
+    html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
     for item in items:
         if isinstance(item, list):
             [image_id, anno_id] = item
