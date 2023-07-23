@@ -150,7 +150,7 @@ def show_annotations(items, origin="", style="query"):
     txt_style = get_anno_txt_style(style)
     html_lines = []
     html_lines.append("<div data-name='annotations' style='{}'>".format(root_style))
-    for item in items:
+    for idx, item in enumerate(items):
         if style == "query":
             if isinstance(item, list):
                 [image_id, anno_id] = item
@@ -176,8 +176,8 @@ def show_annotations(items, origin="", style="query"):
 
             html_lines.append("<div data-name='annotation'>")  # 0
             html_lines.append(
-                "<a href='{}' style='{}' target='_blank'>".format(
-                    url, get_anno_anchor_style(style)
+                "<a href='{}' style='{}' title='{}' target='_blank'>".format(
+                    url, get_anno_anchor_style(style), idx
                 )
             )
             html_lines.append(
