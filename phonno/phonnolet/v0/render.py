@@ -218,10 +218,10 @@ def show_annotations(items, origin="", style="query"):
                     get_anno_anchor_content_image_background_style(style, img_url)
                 )
             )  # 4
+            html_lines.append("</div>")  # 4
             html_lines.append(
                 "<img loading='eager' src='{}' style='{}' />".format(img_url, img_style)
             )
-            html_lines.append("</div>")  # 4
             html_lines.append("</div>")  # 3
             html_lines.append("</div>")  # 2
             html_lines.append("</div>")  # 1
