@@ -24,7 +24,7 @@ def get_token(drive_root_name, colab_name):
             "auth",
             "activate-service-account",
             "--key-file={}".fromat(key_file_path),
-        ]
+        ].join(" ")
     )
     print(res)
 
