@@ -22,17 +22,17 @@ def run_search(queries, origin="", token=""):
             [image_id, anno_id, metadata] = q
             annotation_hint = {
                 "imageId": image_id,
-                "annoId": str(anno_id),
+                "annoId": int(anno_id),
                 "queryIndex": idx,
                 "text": metadata["text"],
             }
             phrase = {
                 "type": "annotation",
                 "imageId": image_id,
-                "annoId": str(anno_id),
+                "annoId": int(anno_id),
                 "desc": metadata["desc"],
             }
-            print(idx, image_id, anno_id, "|", annotation_hint, phrase)
+            print(annotation_hint, phrase)
             continue
         else:
             search_phrase.append(
