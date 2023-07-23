@@ -200,7 +200,7 @@ def show_annotations(items, origin="", style="query"):
                 )
             )  # 3
             html_lines.append(
-                '<div style="{}">'.format(
+                "<div style='{}'>".format(
                     get_anno_anchor_content_image_background_style(style, img_url)
                 )
             )  # 4
@@ -214,5 +214,7 @@ def show_annotations(items, origin="", style="query"):
             html_lines.append("</a>")
             html_lines.append("</div>")  # 0
     html_lines.append("</div>")
-    html_str = "".join(html_lines)
+    html_str = "\n".join(html_lines)
     display(HTML(html_str))
+
+    return html_str
