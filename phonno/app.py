@@ -6,7 +6,7 @@ def run_command(command):
     return completed_process.stdout.decode("utf-8")  # return output as string
 
 
-def get_token(drive_root_name, colab_name):
+def get_aud(drive_root_name, colab_name):
     base_dir = "/content/drive/MyDrive/{0}/{1}".format(drive_root_name, colab_name)
     key_file_path = "{0}/cred.json".format(base_dir)
     aud = ""
@@ -24,10 +24,13 @@ def get_token(drive_root_name, colab_name):
         )
     )
 
+    return aud.strip()
+
+
+def get_token(aud):
     token = run_command(
         " ".join(
             ["gcloud", "auth", "print-identity-token", "--audiences={}".format(aud)]
         )
     )
-
     return token.strip()
