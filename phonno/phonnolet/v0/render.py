@@ -2,7 +2,7 @@ import IPython
 from IPython.display import display, HTML
 
 
-def transform_to_style_attr(style_object):
+def _transform_to_style_attr(style_object):
     style = ""
     for key, value in style_object.items():
         style += "{}:{};".format(key, value)
@@ -11,7 +11,7 @@ def transform_to_style_attr(style_object):
 
 def _get_anno_txt_style(type):
     if type == "query":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "inline-block",
                 "margin": "3px 0",
@@ -21,7 +21,7 @@ def _get_anno_txt_style(type):
 
 def _get_anno_img_style(type):
     if type == "query":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "inline-block",
                 "max-width": "200px",
@@ -36,7 +36,7 @@ def _get_anno_img_style(type):
             }
         )
     elif type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "position": "absolute",
                 "object-fit": "contain",
@@ -53,7 +53,7 @@ def _get_anno_container_style(type, indent):
     margin_l = "24px" if indent else "0px"
     margin_tb = "4px" if indent else "0px"
     if type == "query":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "flex",
                 "gap": "4px",
@@ -64,7 +64,7 @@ def _get_anno_container_style(type, indent):
             }
         )
     elif type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "grid",
                 "width": "100%",
@@ -79,7 +79,7 @@ def _get_anno_container_style(type, indent):
             }
         )
     elif type == "text":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "block",
                 "width": "100%",
@@ -94,7 +94,7 @@ def _get_anno_container_style(type, indent):
 
 def _get_anno_anchor_style(type):
     if type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "block",
                 "position": "relative",
@@ -108,7 +108,7 @@ def _get_anno_anchor_style(type):
 
 def _get_anno_anchor_content_style(type):
     if type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "display": "block",
                 "content": '""',
@@ -120,7 +120,7 @@ def _get_anno_anchor_content_style(type):
 
 def _get_anno_anchor_content_image_style(type):
     if type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "position": "absolute",
                 "margin": "6px",
@@ -134,7 +134,7 @@ def _get_anno_anchor_content_image_style(type):
 
 def _get_anno_anchor_content_image_wrap_style(type):
     if type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "position": "relative",
                 "width": "100%",
@@ -145,7 +145,7 @@ def _get_anno_anchor_content_image_wrap_style(type):
 
 def _get_anno_anchor_content_image_background_style(type, img_url):
     if type == "result":
-        return transform_to_style_attr(
+        return _transform_to_style_attr(
             {
                 "position": "absolute",
                 "object-fit": "cover",
