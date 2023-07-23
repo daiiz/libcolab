@@ -242,12 +242,14 @@ def show_chat(data, origin="", q=False, a=False):
     if a:
         html_lines = []
         html_lines.append(
-            "<div data-name='texts' style='{}'>".format(
+            "<div data-name='text' style='{}'>".format(
                 _get_anno_container_style("text", indent=True)
             )
         )
         html_lines.append("<div>{}</div>".format(data["aRaw"]))
         html_lines.append("</div>")
+        html_str = "".join(html_lines)
+        display(HTML(html_str))
 
         annos = []
         for annoKey in data["hitDocs"].keys():
