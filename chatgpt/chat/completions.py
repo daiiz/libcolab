@@ -20,9 +20,10 @@ def run_chat(
         "model": model,
         "temperature": temperature,
         "messages": messages,
-        "max_tokens": max_tokens,
         "stream": True,
     }
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
     if stop:
         payload["stop"] = stop
 
