@@ -1,7 +1,7 @@
-import requests, json
+import requests, json, re
 
 
-def run_chat(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
+def run_chat2(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
     if isinstance(messages, str):
         messages = [{"role": "user", "content": messages}]
 
@@ -21,4 +21,30 @@ def run_chat(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
         "stream": True,
     }
 
-    print(payload)
+    completion = requests.post(api_url, headers=headers, data=payload, stream=True)
+    res_lines = ""
+    current_line = ""
+    for chunk in completion:
+        lines = chunk.decode("utf8").splitlines()
+        for line in lines:
+            if line.startswith("data: "):
+                if current_line:
+                    current_line = re.sub(r"^data:\s+", "", current_line)
+                    data = json.loads(current_line)
+                    # print("--", data) # for debug
+                    try:
+                        content = data["choices"][0]["delta"]["content"]
+                        content = re.sub(r"\n+", "\n", content)
+                        res_lines += content
+                        print(content, end="")
+                    except Exception as e:
+                        pass
+                # 新たに記録を再開する
+                current_line = line
+            else:
+                current_line += line
+
+    if current_line and current_line.strip() != "data: [DONE]":
+        print("...", current_line)
+
+    print("###", res_lines)
