@@ -1,7 +1,7 @@
 import requests, json, re
 
 
-def run_chat(messages, model="gpt-3.5-turbo", temperature=0, key=""):
+def run_chat(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=500, key=""):
     if isinstance(messages, str):
         messages = [{"role": "user", "content": messages}]
 
@@ -18,6 +18,7 @@ def run_chat(messages, model="gpt-3.5-turbo", temperature=0, key=""):
         "model": model,
         "temperature": temperature,
         "messages": messages,
+        "max_tokens": max_tokens,
         "stream": True,
     }
 
