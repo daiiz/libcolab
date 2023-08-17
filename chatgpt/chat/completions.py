@@ -1,7 +1,7 @@
 import requests, json, re
 
 
-def run_chat(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=500, key=""):
+def run_chat(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=1000, key=""):
     if isinstance(messages, str):
         messages = [{"role": "user", "content": messages}]
 
