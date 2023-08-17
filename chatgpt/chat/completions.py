@@ -38,6 +38,7 @@ def run_chat(messages, model="gpt-3.5-turbo", temperature=0, key=""):
                         res_lines += content
                         print(content, end="")
                     except Exception as e:
+                        print("Error:", e)
                         pass
                 # 新たに記録を再開する
                 current_line = line
