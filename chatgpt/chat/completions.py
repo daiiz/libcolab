@@ -44,7 +44,6 @@ def run_chat(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
             else:
                 current_line += line
 
-    if current_line and current_line.strip() != "data: [DONE]":
-        print("...", current_line)
-
-    print("###", res_lines)
+    # if current_line and current_line.strip() != "data: [DONE]":
+    #     print("...", current_line)
+    return res_lines
