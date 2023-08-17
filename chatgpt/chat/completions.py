@@ -1,7 +1,7 @@
 import requests, json, re
 
 
-def run_chat2(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
+def run_chat(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
     if isinstance(messages, str):
         messages = [{"role": "user", "content": messages}]
 
@@ -21,7 +21,7 @@ def run_chat2(messages, model="gpt-3.5-turbo", temperature=0.5, key=""):
         "stream": True,
     }
 
-    completion = requests.post(api_url, headers=headers, data=payload, stream=True)
+    completion = requests.post(api_url, headers=headers, json=payload, stream=True)
     res_lines = ""
     current_line = ""
     for chunk in completion:
