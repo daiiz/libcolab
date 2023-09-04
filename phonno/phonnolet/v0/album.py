@@ -39,3 +39,21 @@ def get_photos_at(date_str=None, location=None, origin="", token="", zone="UTC")
         return data["images"]
     else:
         raise Exception("Error: {}".format(r.status_code))
+
+
+def get_images_at(date_str, origin="", token="", zone="UTC"):
+    if not date_str:
+        raise Exception("No date provided")
+    api_url = "{}/api/memory/images".format(origin)
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer " + token,
+    }
+    payload = {"timestamp": _convertToMilliSeconds(date_str, zone)}
+    r = requests.post(api_url, json=payload, headers=headers)
+    if r.status_code == 200:
+        data = r.json()
+        return data["images"]
+    else:
+        raise Exception("Error: {}".format(r.status_code))
