@@ -16,7 +16,7 @@ def _convertToMilliSeconds(date_str, zone="UTC"):
     return int(timestamp * 1000)
 
 
-def get_photos_at(date_str, location, origin="", token="", zone="UTC"):
+def get_photos_at(date_str=None, location=None, origin="", token="", zone="UTC"):
     if not date_str and not location:
         raise Exception("No date or location provided")
     api_url = "{}/api/memory/photos".format(origin)
