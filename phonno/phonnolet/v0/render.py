@@ -48,7 +48,7 @@ def _get_anno_img_style(type):
         )
 
 
-def _get_anno_container_style(type, indent):
+def _get_anno_container_style(type, indent, repeat_in_row):
     margin_l = "24px" if indent else "0px"
     margin_tb = "4px" if indent else "0px"
     if type == "query":
@@ -69,7 +69,9 @@ def _get_anno_container_style(type, indent):
                 "width": "100%",
                 "max-width": "1000px",
                 "grid-auto-rows": "1fr",
-                "grid-template-columns": "repeat(10,minmax(0,1fr))",
+                "grid-template-columns": "repeat({},minmax(0,1fr))".format(
+                    str(repeat_in_row)
+                ),
                 "height": "auto",
                 "gap": "2px",
                 "margin-left": margin_l,
@@ -162,7 +164,9 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
         )
 
 
-def show_annotations(items, origin="", img_origin="", style="query", indent=False):
+def show_annotations(
+    items, origin="", img_origin="", style="query", repeat_in_row=10, indent=False
+):
     root_style = _get_anno_container_style(style, indent)
     img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
@@ -235,14 +239,19 @@ def show_annotations(items, origin="", img_origin="", style="query", indent=Fals
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(image_ids, origin="", indent=False):
+def show_images(image_ids, origin="", repeat_in_row=6, indent=False):
     img_origin = "https://gyazo.com"
     items = []
     for image_id in image_ids:
         # anooIdとmetadataは不要なので仮の値を与えておく
         items.append([image_id, -1, {}])
     show_annotations(
-        items, origin=origin, img_origin=img_origin, style="result", indent=indent
+        items,
+        origin=origin,
+        img_origin=img_origin,
+        style="result",
+        repeat_in_row=repeat_in_row,
+        indent=indent,
     )
 
 
