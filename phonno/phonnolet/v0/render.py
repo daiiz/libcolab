@@ -191,7 +191,6 @@ def show_annotations(items, origin="", img_origin="", style="query", indent=Fals
             [image_id, anno_id, metadata] = item
 
             if img_origin.startswith("https://gyazo.com/"):
-                print("hi:", img_origin)
                 url = "{}/{}".format(origin, image_id)
                 img_url = "{}/{}/thumb/400".format(img_origin, image_id)
             else:
@@ -236,10 +235,12 @@ def show_annotations(items, origin="", img_origin="", style="query", indent=Fals
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(items, indent=False):
-    parsed_items = []
-    for item in items:
-        pass
+def show_images(image_ids, indent=False):
+    items = []
+    for image_id in image_ids:
+        # anooIdとmetadataは不要なので仮の値を与えておく
+        items.append([image_id, -1, {}])
+    show_annotations(items, style="result", indent=indent)
 
 
 def show_chat(data, origin="", q=False, a=False):
