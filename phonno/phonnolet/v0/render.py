@@ -192,6 +192,8 @@ def show_annotations(items, origin="", img_origin="", style="query", indent=Fals
 
             if img_origin.startswith("https://gyazo.com/"):
                 print("hi:", img_origin)
+                url = "{}/{}".format(origin, image_id)
+                img_url = "{}/{}/thumb/400".format(img_origin, image_id)
             else:
                 url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
