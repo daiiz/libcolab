@@ -4,9 +4,11 @@ from zoneinfo import ZoneInfo
 
 
 def _convertToMilliSeconds(date_str, zone="UTC"):
-    # e.g. date_str: "2021-08-01"
     # Convert string to a datetime object
-    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    if "-" in date_str:
+        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    elif "/" in date_str:
+        date_obj = datetime.strptime(date_str, "%Y/%m/%d")
     # Set the timezone for the date
     tokyo_timezone = ZoneInfo(zone)
     date_obj_tz = date_obj.replace(tzinfo=tokyo_timezone)
