@@ -275,7 +275,7 @@ def show_chat(data, origin="", q=False, a=False):
         html_lines = []
         html_lines.append(
             "<div data-name='text' style='{}'>".format(
-                _get_anno_container_style("text", indent=True)
+                _get_anno_container_style("text", indent=True, repeat_in_row=10)
             )
         )
         html_lines.append("<div>{}</div>".format(data["aRaw"]))
