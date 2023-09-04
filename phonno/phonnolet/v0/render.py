@@ -162,7 +162,7 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
         )
 
 
-def show_annotations(items, origin="", style="query", indent=False):
+def show_annotations(items, origin="", img_origin="", style="query", indent=False):
     root_style = _get_anno_container_style(style, indent)
     img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
@@ -189,10 +189,14 @@ def show_annotations(items, origin="", style="query", indent=False):
             if not isinstance(item, list):
                 continue
             [image_id, anno_id, metadata] = item
-            url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
-            img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
-                origin, image_id, str(anno_id)
-            )
+
+            if img_origin.startswith("https://gyazo.com/"):
+                print("hi:", img_origin)
+            else:
+                url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+                img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
+                    origin, image_id, str(anno_id)
+                )
 
             html_lines.append("<div data-name='annotation'>")  # 0
             html_lines.append(
@@ -228,6 +232,12 @@ def show_annotations(items, origin="", style="query", indent=False):
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     IPython.display.display(IPython.display.HTML(html_str))
+
+
+def show_images(items, indent=False):
+    parsed_items = []
+    for item in items:
+        pass
 
 
 def show_chat(data, origin="", q=False, a=False):
