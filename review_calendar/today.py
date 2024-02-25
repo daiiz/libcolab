@@ -3,8 +3,9 @@
 from datetime import datetime
 
 
-def get_today():
-    return datetime.now()
+def get_today(y = datetime.now().year, m = datetime.now().month, d = datetime.now().day):
+
+    return datetime(y, m, d)
 
 
 def get_today_y_m_n_k(today = datetime.now()):
