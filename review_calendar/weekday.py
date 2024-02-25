@@ -82,7 +82,7 @@ def get_past_k_weekdays_list(range_m, k, reference_date=None):
     The function returns a list of dates without future dates or duplicates, sorted in descending order.
 
     Parameters:
-    - rangeM (int): The range in months before the reference date from which to generate the list of weekdays.
+    - range_m (int): The range in months before the reference date from which to generate the list of weekdays.
     - k (int): The weekday for which to generate the list, where Monday is 0 and Sunday is 6.
     - reference_date (datetime.datetime, optional): The reference date from which to calculate the past range. If not provided, today's date is used.
 
