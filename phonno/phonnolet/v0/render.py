@@ -100,7 +100,7 @@ def _get_anno_anchor_style(type):
                 "display": "block",
                 "position": "relative",
                 "cursor": "pointer",
-                "background": "hsla(0,0%,100%,.98)",
+                "background": "hsla(0, 0%, 100%, .98)",
                 "border-radius": "2px",
                 "text-decoration": "none",
             }
