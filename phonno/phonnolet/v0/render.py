@@ -100,7 +100,7 @@ def _get_anno_container_style(type, indent, repeat_in_row):
         )
 
 
-def _get_anno_anchor_style(type):
+def _get_anno_anchor_style(type, theme=""):
     theme = get_colab_theme()
     if type == "result":
         return _transform_to_style_attr(
@@ -127,8 +127,7 @@ def _get_anno_anchor_content_style(type):
         )
 
 
-def _get_anno_anchor_content_image_style(type):
-    theme = get_colab_theme()
+def _get_anno_anchor_content_image_style(type, theme=""):
     if type == "result":
         return _transform_to_style_attr(
             {
@@ -174,9 +173,8 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
 
 
 def show_annotations(
-    items, origin="", img_origin="", style="query", repeat_in_row=10, indent=False
+    items, origin="", img_origin="", style="query", repeat_in_row=10, indent=False, theme=""
 ):
-    print("....", get_colab_theme())
     root_style = _get_anno_container_style(style, indent, repeat_in_row)
     img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
@@ -216,14 +214,14 @@ def show_annotations(
             html_lines.append("<div data-name='annotation'>")  # 0
             html_lines.append(
                 "<a href='{}' style='{}' title='{}' target='_blank'>".format(
-                    url, _get_anno_anchor_style(style), idx
+                    url, _get_anno_anchor_style(style, theme), idx
                 )
             )
             html_lines.append(
                 "<div style='{}'>".format(_get_anno_anchor_content_style(style))
             )  # 1
             html_lines.append(
-                "<div style='{}'>".format(_get_anno_anchor_content_image_style(style))
+                "<div style='{}'>".format(_get_anno_anchor_content_image_style(style, theme))
             )  # 2
             html_lines.append(
                 "<div style='{}'>".format(
@@ -249,7 +247,7 @@ def show_annotations(
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(image_ids, origin="", repeat_in_row=6, indent=False):
+def show_images(image_ids, origin="", repeat_in_row=6, indent=False, theme=""):
     img_origin = "https://gyazo.com"
     items = []
     for image_id in image_ids:
@@ -262,6 +260,7 @@ def show_images(image_ids, origin="", repeat_in_row=6, indent=False):
         style="result",
         repeat_in_row=repeat_in_row,
         indent=indent,
+        theme=theme,
     )
 
 
