@@ -7,6 +7,7 @@ def get_colab_theme():
   theme = output.eval_js('document.documentElement.getAttribute("theme")')
   return theme
 
+
 def _transform_to_style_attr(style_object):
     style = ""
     for key, value in style_object.items():
@@ -100,13 +101,14 @@ def _get_anno_container_style(type, indent, repeat_in_row):
 
 
 def _get_anno_anchor_style(type):
+    theme = get_colab_theme()
     if type == "result":
         return _transform_to_style_attr(
             {
                 "display": "block",
                 "position": "relative",
                 "cursor": "pointer",
-                "background": "hsla(0, 0%, 100%, .98)",
+                "background": "hsla(0, 0%, 100%, .98)" if theme != "dark" else "rgba(40, 42, 45, .98)",
                 "border-radius": "2px",
                 "text-decoration": "none",
             }
