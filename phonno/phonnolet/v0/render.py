@@ -101,7 +101,6 @@ def _get_anno_container_style(type, indent, repeat_in_row):
 
 
 def _get_anno_anchor_style(type, theme=""):
-    theme = get_colab_theme()
     if type == "result":
         return _transform_to_style_attr(
             {
