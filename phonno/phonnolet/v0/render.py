@@ -176,6 +176,7 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
 def show_annotations(
     items, origin="", img_origin="", style="query", repeat_in_row=10, indent=False
 ):
+    print("....", get_colab_theme())
     root_style = _get_anno_container_style(style, indent, repeat_in_row)
     img_style = _get_anno_img_style(style)
     txt_style = _get_anno_txt_style(style)
