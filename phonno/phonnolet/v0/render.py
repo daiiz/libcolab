@@ -1,5 +1,11 @@
+from google.colab import output
 import IPython.display
 
+def get_colab_theme():
+  """Returns the current Colab theme ('light' or 'dark') as a string."""
+  # Execute JavaScript to get the theme and return it to Python
+  theme = output.eval_js('document.documentElement.getAttribute("theme")')
+  return theme
 
 def _transform_to_style_attr(style_object):
     style = ""
@@ -120,6 +126,7 @@ def _get_anno_anchor_content_style(type):
 
 
 def _get_anno_anchor_content_image_style(type):
+    theme = get_colab_theme()
     if type == "result":
         return _transform_to_style_attr(
             {
@@ -127,7 +134,7 @@ def _get_anno_anchor_content_image_style(type):
                 "margin": "6px",
                 "width": "calc(100% - 12px)",
                 "height": "calc(100% - 12px)",
-                "background-color": "#fff",
+                "background-color": "#fff" if theme != "dark" else "#282a2d",
                 "border-radius": "1px",
             }
         )
