@@ -172,7 +172,7 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
 
 
 def show_annotations(
-    items, origin="", img_origin="", style="query", repeat_in_row=10, indent=False, theme=""
+    items, origin="", img_origin="", project_name="", style="query", repeat_in_row=10, indent=False, theme=""
 ):
     root_style = _get_anno_container_style(style, indent, repeat_in_row)
     img_style = _get_anno_img_style(style)
@@ -185,7 +185,7 @@ def show_annotations(
         if style == "query":
             if isinstance(item, list):
                 [image_id, anno_id, metadata] = item
-                url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+                url = "{}/{}/{}#a{}".format(origin, project_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
@@ -202,7 +202,7 @@ def show_annotations(
             [image_id, anno_id, metadata] = item
 
             if img_origin == "https://gyazo.com":
-                url = "{}/{}".format(origin, image_id)
+                url = "{}/{}/{}".format(origin, project_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
                 url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
@@ -256,6 +256,7 @@ def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=F
         items,
         origin=origin,
         img_origin=img_origin,
+        project_name=project_name,
         style="result",
         repeat_in_row=repeat_in_row,
         indent=indent,
