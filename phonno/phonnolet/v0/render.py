@@ -246,7 +246,7 @@ def show_annotations(
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(image_ids, origin="", repeat_in_row=6, indent=False, theme=""):
+def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=False, theme=""):
     img_origin = "https://gyazo.com"
     items = []
     for image_id in image_ids:
