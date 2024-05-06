@@ -279,7 +279,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
                 query.append([item["imageId"], int(item["annoId"])])
             elif item["type"] == "text":
                 query.append(item["text"])
-        show_annotations(query, origin=origin, project_name=project_name, style="query", indent=True)
+        show_annotations(query, origin=origin, project_name=project_name, style="query", indent=True, theme=theme)
     if a:
         html_lines = []
         html_lines.append(
@@ -296,7 +296,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
         for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
-        show_annotations(annos, origin=origin, project_name=project_name, style="result", indent=True)
+        show_annotations(annos, origin=origin, project_name=project_name, style="result", indent=True, theme=theme)
 
     IPython.display.display(
         IPython.display.HTML(
