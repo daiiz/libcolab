@@ -205,7 +205,7 @@ def show_annotations(
                 url = "{}/{}/{}".format(origin, project_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
-                url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+                url = "{}/{}/{}#a{}".format(origin, project_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
@@ -264,7 +264,7 @@ def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=F
     )
 
 
-def show_chat(data, origin="", project_name="", q=False, a=False):
+def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     IPython.display.display(
@@ -279,7 +279,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False):
                 query.append([item["imageId"], int(item["annoId"])])
             elif item["type"] == "text":
                 query.append(item["text"])
-        show_annotations(query, origin=origin, project_name=project_name, style="query", indent=True)
+        show_annotations(query, origin=origin, project_name=project_name, style="query", indent=True, theme=theme)
     if a:
         html_lines = []
         html_lines.append(
@@ -296,7 +296,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False):
         for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
-        show_annotations(annos, origin=origin, project_name=project_name, style="result", indent=True)
+        show_annotations(annos, origin=origin, project_name=project_name, style="result", indent=True, theme=theme)
 
     IPython.display.display(
         IPython.display.HTML(
