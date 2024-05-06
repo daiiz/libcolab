@@ -205,7 +205,7 @@ def show_annotations(
                 url = "{}/{}/{}".format(origin, project_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
-                url = "{}/{}#a{}".format(origin, image_id, int(anno_id) + 1)
+                url = "{}/{}/{}#a{}".format(origin, project_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
