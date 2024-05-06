@@ -264,7 +264,7 @@ def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=F
     )
 
 
-def show_chat(data, origin="", project_name="", q=False, a=False):
+def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     IPython.display.display(
