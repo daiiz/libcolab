@@ -2,7 +2,7 @@
 import datetime
 import random
 
-def random_date_between(start_date, end_date=None):
+def get_random_date_between(start_date, end_date=None):
     """開始日と終了日の間のランダムな日付を "YYYY-M-D" 形式で返す。
 
     Args:
