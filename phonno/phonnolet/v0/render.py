@@ -172,7 +172,7 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
 
 
 def show_annotations(
-    items, origin="", img_origin="", project_name="", style="query", repeat_in_row=10, indent=False, theme=""
+    items, origin="", img_origin="", project_name="", app_name="", style="query", repeat_in_row=10, indent=False, theme=""
 ):
     root_style = _get_anno_container_style(style, indent, repeat_in_row)
     img_style = _get_anno_img_style(style)
@@ -185,7 +185,7 @@ def show_annotations(
         if style == "query":
             if isinstance(item, list):
                 [image_id, anno_id, metadata] = item
-                url = "{}/{}/{}#a{}".format(origin, project_name, image_id, int(anno_id) + 1)
+                url = "{}/{}/app/{}/image/{}#a{}".format(origin, project_name, app_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
@@ -202,10 +202,10 @@ def show_annotations(
             [image_id, anno_id, metadata] = item
 
             if img_origin == "https://gyazo.com":
-                url = "{}/{}/{}".format(origin, project_name, image_id)
+                url = "{}/{}/app/{}/image/{}".format(origin, project_name, app_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
-                url = "{}/{}/{}#a{}".format(origin, project_name, image_id, int(anno_id) + 1)
+                url = "{}/{}/app/{}/image/{}#a{}".format(origin, project_name, app_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
@@ -246,7 +246,7 @@ def show_annotations(
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=False, theme=""):
+def show_images(image_ids, origin="", project_name="", app_name="", repeat_in_row=6, indent=False, theme=""):
     img_origin = "https://gyazo.com"
     items = []
     for image_id in image_ids:
@@ -257,6 +257,7 @@ def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=F
         origin=origin,
         img_origin=img_origin,
         project_name=project_name,
+        app_name=app_name,
         style="result",
         repeat_in_row=repeat_in_row,
         indent=indent,
@@ -264,7 +265,7 @@ def show_images(image_ids, origin="", project_name="", repeat_in_row=6, indent=F
     )
 
 
-def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
+def show_chat(data, origin="", project_name="", app_name="", q=False, a=False, theme=""):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     IPython.display.display(
@@ -279,7 +280,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
                 query.append([item["imageId"], int(item["annoId"])])
             elif item["type"] == "text":
                 query.append(item["text"])
-        show_annotations(query, origin=origin, project_name=project_name, style="query", indent=True, theme=theme)
+        show_annotations(query, origin=origin, project_name=project_name, app_name=app_name, style="query", indent=True, theme=theme)
     if a:
         html_lines = []
         html_lines.append(
@@ -296,7 +297,7 @@ def show_chat(data, origin="", project_name="", q=False, a=False, theme=""):
         for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
-        show_annotations(annos, origin=origin, project_name=project_name, style="result", indent=True, theme=theme)
+        show_annotations(annos, origin=origin, project_name=project_name, app_name=app_name, style="result", indent=True, theme=theme)
 
     IPython.display.display(
         IPython.display.HTML(
