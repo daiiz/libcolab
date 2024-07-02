@@ -202,7 +202,7 @@ def show_annotations(
             [image_id, anno_id, metadata] = item
 
             if img_origin == "https://gyazo.com":
-                url = "{}/{}/{}".format(origin, project_name, image_id)
+                url = "{}/{}/app/{}/image/{}".format(origin, project_name, app_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
                 url = "{}/{}/app/{}/image/{}#a{}".format(origin, project_name, app_name, image_id, int(anno_id) + 1)
