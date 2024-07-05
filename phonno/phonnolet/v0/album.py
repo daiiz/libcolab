@@ -21,7 +21,7 @@ def _convertToMilliSeconds(date_str, zone="UTC"):
 def get_photos_at(date_str=None, location=None, origin="", token="", zone="UTC"):
     if not date_str and not location:
         raise Exception("No date or location provided")
-    api_url = "{}/api/memory/photos".format(origin)
+    api_url = "{}/api/v1/memory/photos".format(origin)
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -44,7 +44,7 @@ def get_photos_at(date_str=None, location=None, origin="", token="", zone="UTC")
 def get_images_at(date_str, origin="", token="", zone="UTC"):
     if not date_str:
         raise Exception("No date provided")
-    api_url = "{}/api/memory/images".format(origin)
+    api_url = "{}/api/v1/memory/images".format(origin)
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
