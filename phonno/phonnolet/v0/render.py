@@ -185,7 +185,7 @@ def show_annotations(
         if style == "query":
             if isinstance(item, list):
                 [image_id, anno_id, metadata] = item
-                url = "{}/{}/app/{}/image/{}#a{}".format(origin, project_name, app_name, image_id, int(anno_id) + 1)
+                url = "{}/{}/{}#a{}".format(origin, app_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
@@ -202,10 +202,10 @@ def show_annotations(
             [image_id, anno_id, metadata] = item
 
             if img_origin == "https://gyazo.com":
-                url = "{}/{}/app/{}/image/{}".format(origin, project_name, app_name, image_id)
+                url = "{}/{}/{}".format(origin, app_name, image_id)
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
-                url = "{}/{}/app/{}/image/{}#a{}".format(origin, project_name, app_name, image_id, int(anno_id) + 1)
+                url = "{}/{}/{}#a{}".format(origin, app_name, image_id, int(anno_id) + 1)
                 img_url = "{}/api/data/annotations_images?imageId={}&annoId={}".format(
                     origin, image_id, str(anno_id)
                 )
