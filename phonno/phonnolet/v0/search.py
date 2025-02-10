@@ -1,12 +1,12 @@
 import requests
 
 
-def run_search(queries, origin="", token=""):
+def run_search(queries, origin="", app_name="", token=""):
     if len(queries) == 0:
         return []
     if not token:
         raise Exception("No token provided")
-    api_url = "{}/api/v2/legacy/similar".format(origin)
+    api_url = "{}/api/v2/{}/similar".format(origin, app_name)
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",

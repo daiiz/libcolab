@@ -1,7 +1,7 @@
 import urllib, requests
 
 
-def similar_with(queries, topk=5, origin="", token=""):
+def similar_with(queries, topk=5, origin="", app_name="", token=""):
     if not token:
         raise Exception("No token provided")
     qs = []
@@ -16,8 +16,9 @@ def similar_with(queries, topk=5, origin="", token=""):
             qs.append(q.strip())
     if len(qs) == 0:
         return [], []
-    api_url = "{}/api/v2/app/legacy/chat/similar?q={}&limit={}".format(
+    api_url = "{}/api/v2/app/{}/chat/similar?q={}&limit={}".format(
         origin,
+        app_name,
         urllib.parse.quote(" ".join(qs)),
         topk,
     )
