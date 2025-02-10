@@ -16,7 +16,7 @@ def similar_with(queries, topk=5, origin="", token=""):
             qs.append(q.strip())
     if len(qs) == 0:
         return [], []
-    api_url = "{}/api/chat/similar?q={}&limit={}".format(
+    api_url = "{}/api/v2/app/legacy/chat/similar?q={}&limit={}".format(
         origin,
         urllib.parse.quote(" ".join(qs)),
         topk,
