@@ -6,7 +6,7 @@ def run_search(queries, origin="", token=""):
         return []
     if not token:
         raise Exception("No token provided")
-    api_url = "{}/api/similar".format(origin)
+    api_url = "{}/api/v2/legacy/similar".format(origin)
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
