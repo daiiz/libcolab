@@ -186,8 +186,8 @@ def show_annotations(
             if isinstance(item, list):
                 [image_id, anno_id, metadata] = item
                 url = "{}/{}/{}#a{}".format(origin, app_name, image_id, int(anno_id) + 1)
-                img_url = "{}/api/v2/legacy/data/annotations_images?imageId={}&annoId={}".format(
-                    origin, image_id, str(anno_id)
+                img_url = "{}/api/v2/{}/data/annotations_images?imageId={}&annoId={}".format(
+                    origin, app_name, image_id, str(anno_id)
                 )
                 html_lines.append(
                     "<a href='{}' target='_blank'><img src='{}' style='{}' /></a>".format(
@@ -206,8 +206,8 @@ def show_annotations(
                 img_url = "{}/{}/thumb/300".format(img_origin, image_id)
             else:
                 url = "{}/{}/{}#a{}".format(origin, app_name, image_id, int(anno_id) + 1)
-                img_url = "{}/api/v2/legacy/data/annotations_images?imageId={}&annoId={}".format(
-                    origin, image_id, str(anno_id)
+                img_url = "{}/api/v2/{}/data/annotations_images?imageId={}&annoId={}".format(
+                    origin, app_name, image_id, str(anno_id)
                 )
 
             html_lines.append("<div data-name='annotation'>")  # 0
