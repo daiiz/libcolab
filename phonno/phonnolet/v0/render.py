@@ -172,7 +172,7 @@ def _get_anno_anchor_content_image_background_style(type, img_url):
 
 
 def show_annotations(
-    items, origin="", img_origin="", project_name="", app_name="", style="query", repeat_in_row=10, indent=False, theme=""
+    items, origin="", img_origin="", app_name="", style="query", repeat_in_row=10, indent=False, theme=""
 ):
     root_style = _get_anno_container_style(style, indent, repeat_in_row)
     img_style = _get_anno_img_style(style)
@@ -246,7 +246,7 @@ def show_annotations(
     IPython.display.display(IPython.display.HTML(html_str))
 
 
-def show_images(image_ids, origin="", project_name="", app_name="", repeat_in_row=6, indent=False, theme=""):
+def show_images(image_ids, origin="", app_name="", repeat_in_row=6, indent=False, theme=""):
     img_origin = "https://gyazo.com"
     items = []
     for image_id in image_ids:
@@ -256,7 +256,6 @@ def show_images(image_ids, origin="", project_name="", app_name="", repeat_in_ro
         items,
         origin=origin,
         img_origin=img_origin,
-        project_name=project_name,
         app_name=app_name,
         style="result",
         repeat_in_row=repeat_in_row,
@@ -265,7 +264,7 @@ def show_images(image_ids, origin="", project_name="", app_name="", repeat_in_ro
     )
 
 
-def show_chat(data, origin="", project_name="", app_name="", q=False, a=False, theme=""):
+def show_chat(data, origin="", app_name="", q=False, a=False, theme=""):
     chat_id = data["chatId"]
     chat_uri = "{}/share/{}".format(origin, chat_id)
     IPython.display.display(
@@ -280,7 +279,7 @@ def show_chat(data, origin="", project_name="", app_name="", q=False, a=False, t
                 query.append([item["imageId"], int(item["annoId"])])
             elif item["type"] == "text":
                 query.append(item["text"])
-        show_annotations(query, origin=origin, project_name=project_name, app_name=app_name, style="query", indent=True, theme=theme)
+        show_annotations(query, origin=origin, app_name=app_name, style="query", indent=True, theme=theme)
     if a:
         html_lines = []
         html_lines.append(
@@ -297,7 +296,7 @@ def show_chat(data, origin="", project_name="", app_name="", q=False, a=False, t
         for annoKey in data["hitDocs"].keys():
             anno = data["hitDocs"][annoKey]
             annos.append([anno["imageId"], int(anno["annoId"])])
-        show_annotations(annos, origin=origin, project_name=project_name, app_name=app_name, style="result", indent=True, theme=theme)
+        show_annotations(annos, origin=origin, app_name=app_name, style="result", indent=True, theme=theme)
 
     IPython.display.display(
         IPython.display.HTML(
