@@ -7,7 +7,7 @@ def run_search(queries, origin="", app_name="", token=""):
     if not token:
         raise Exception("No token provided")
     search_type = "similar"
-    if len(queries) === 0:
+    if len(queries) == 0:
         search_type = "random"
     print("#### search_type: ", search_type)
     api_url = "{}/api/v2/{}/{}".format(origin, app_name, search_type)
