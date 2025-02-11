@@ -7,7 +7,7 @@ def run_search(queries, origin="", app_name="", token=""):
     search_type = "similar"
     if len(queries) == 0:
         search_type = "random"
-    print("#### search_type: ", search_type)
+    # print("#### search_type: ", search_type)
     api_url = "{}/api/v2/{}/{}".format(origin, app_name, search_type)
     headers = {
         "Content-Type": "application/json",
