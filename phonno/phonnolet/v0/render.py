@@ -244,6 +244,7 @@ def show_annotations(
     html_lines.append("</div>")
     html_str = "".join(html_lines)
     IPython.display.display(IPython.display.HTML(html_str))
+    return html_str
 
 
 def show_images(image_ids, origin="", app_name="", repeat_in_row=6, indent=False, theme=""):
