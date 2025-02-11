@@ -2,8 +2,6 @@ import requests
 
 
 def run_search(queries, origin="", app_name="", token=""):
-    if len(queries) == 0:
-        return []
     if not token:
         raise Exception("No token provided")
     search_type = "similar"
