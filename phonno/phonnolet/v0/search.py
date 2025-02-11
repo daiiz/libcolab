@@ -6,7 +6,7 @@ def run_search(queries, origin="", app_name="", search_type="similar", token="")
         raise Exception("No token provided")
     if len(queries) == 0 and search_type == "similar":
         raise Exception("No queries provided. Please specify 'random' or 'recent'.")
-    print("[### run_search] search_type: ", search_type)
+    # print("[### run_search] search_type: ", search_type)
     api_url = "{}/api/v2/{}/{}".format(origin, app_name, search_type)
     headers = {
         "Content-Type": "application/json",
