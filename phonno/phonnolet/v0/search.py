@@ -46,7 +46,7 @@ def run_search(queries, origin="", app_name="", search_type="similar", token="")
     payload = {
         "paginateSkip": 0,
     }
-    if search_type === "similar":
+    if search_type == "similar":
         payload["searchPhrase"] = search_phrase
         payload["annotationHints"] = annotation_hints
 
