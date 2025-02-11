@@ -1,13 +1,12 @@
 import requests
 
 
-def run_search(queries, origin="", app_name="", token=""):
+def run_search(queries, origin="", app_name="", search_type="similar", token=""):
     if not token:
         raise Exception("No token provided")
-    search_type = "similar"
-    if len(queries) == 0:
-        search_type = "random"
-    # print("#### search_type: ", search_type)
+    if len(queries) == 0 and search_type == "similar":
+        raise Exception("No queries provided. Please specify 'random' or 'recent'.")
+    print("[### run_search] search_type: ", search_type)
     api_url = "{}/api/v2/{}/{}".format(origin, app_name, search_type)
     headers = {
         "Content-Type": "application/json",
@@ -45,10 +44,11 @@ def run_search(queries, origin="", app_name="", token=""):
             )
 
     payload = {
-        "searchPhrase": search_phrase,
-        "annotationHints": annotation_hints,
         "paginateSkip": 0,
     }
+    if search_type === "similar":
+        payload["searchPhrase"] = search_phrase
+        payload["annotationHints"] = annotation_hints
 
     r = requests.post(api_url, json=payload, headers=headers)
     if r.status_code == 200:
