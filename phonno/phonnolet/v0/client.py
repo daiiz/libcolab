@@ -9,35 +9,25 @@ class PhonnoClient:
     Usage:
         client = PhonnoClient(
             origin="...",
-            project_name="...",  # deprecated, kept for backward compatibility
-            app_name="legacy",
             token="your_token_here"
         )
 
         # GET request
-        response = client.get("/api/v2/{app_name}/similar")
+        response = client.get("/api/v2/legacy/similar")
 
         # POST request
-        response = client.post("/api/v2/{app_name}/chat", json={"key": "value"})
+        response = client.post("/api/v2/legacy/chat", json={"key": "value"})
     """
 
-    def __init__(self, origin, project_name=None, app_name=None, token=""):
+    def __init__(self, origin, token=""):
         """
         Initialize the Phonno client.
 
         Args:
             origin (str): The base URL
-            project_name (str): Deprecated parameter, kept for backward compatibility
-            app_name (str): The application name (e.g., "legacy")
             token (str): The authentication token
         """
         self.origin = origin.rstrip("/")
-
-        # Handle deprecated project_name parameter
-        if project_name and not app_name:
-            app_name = project_name
-
-        self.app_name = app_name
         self.token = token
 
     def _get_headers(self, extra_headers=None):
@@ -62,23 +52,13 @@ class PhonnoClient:
     def _build_url(self, pathname):
         """
         Build full URL from pathname.
-        Replaces {app_name} placeholder if present.
 
         Args:
-            pathname (str): The path (e.g., "/api/v2/{app_name}/similar")
+            pathname (str): The path
 
         Returns:
             str: Complete URL
-
-        Raises:
-            ValueError: If pathname contains {app_name} but app_name is not set
         """
-        # Check if app_name is required but not provided
-        if "{app_name}" in pathname:
-            if not self.app_name:
-                raise ValueError("This path requires an app_name, but it was not provided during client initialization.")
-            pathname = pathname.replace("{app_name}", self.app_name)
-
         # Ensure pathname starts with /
         if not pathname.startswith("/"):
             pathname = "/" + pathname
@@ -90,7 +70,7 @@ class PhonnoClient:
         Perform a GET request.
 
         Args:
-            pathname (str): The path (e.g., "/api/v2/{app_name}/similar")
+            pathname (str): The path
             headers (dict): Additional headers (optional)
             params (dict): URL query parameters (optional)
 
@@ -107,7 +87,7 @@ class PhonnoClient:
         Perform a POST request.
 
         Args:
-            pathname (str): The path (e.g., "/api/v2/{app_name}/chat")
+            pathname (str): The path
             json (dict): JSON payload (optional)
             data (dict): Form data payload (optional)
             headers (dict): Additional headers (optional)
