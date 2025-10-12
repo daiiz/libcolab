@@ -69,9 +69,15 @@ class PhonnoClient:
 
         Returns:
             str: Complete URL
+
+        Raises:
+            ValueError: If pathname contains {app_name} but app_name is not set
         """
-        # Replace {app_name} placeholder
-        pathname = pathname.replace("{app_name}", self.app_name)
+        # Check if app_name is required but not provided
+        if "{app_name}" in pathname:
+            if not self.app_name:
+                raise ValueError("This path requires an app_name, but it was not provided during client initialization.")
+            pathname = pathname.replace("{app_name}", self.app_name)
 
         # Ensure pathname starts with /
         if not pathname.startswith("/"):
