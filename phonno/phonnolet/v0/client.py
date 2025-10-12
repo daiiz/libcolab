@@ -13,10 +13,10 @@ class PhonnoClient:
         )
 
         # GET request
-        response = client.get("/api/v2/legacy/similar")
+        response = client.get("/api/v2/example/similar")
 
         # POST request
-        response = client.post("/api/v2/legacy/chat", json={"key": "value"})
+        response = client.post("/api/v2/example/chat", json={"key": "value"})
     """
 
     def __init__(self, origin, token=""):
