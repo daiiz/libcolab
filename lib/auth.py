@@ -45,6 +45,7 @@ def get_audience2(colab_name):
         key_file_path = tmp_file.name
 
         try:
+            print(">>>>>.", cred_json[:10], cred_json[-10:])
             run_command(
                 " ".join(
                     [
