@@ -41,7 +41,7 @@ def get_audience2(colab_name):
 
     # Write credential JSON to temporary file and activate service account
     with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as tmp_file:
-        tmp_file.write('{ "test": "data" }')
+        tmp_file.write(cred_json)
         key_file_path = tmp_file.name
 
         try:
