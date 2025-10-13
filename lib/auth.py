@@ -58,8 +58,7 @@ def get_audience2(colab_name):
         #     )
         # )
     finally:
-        pass
-        # os.unlink(key_file_path)
+        os.unlink(key_file_path)
 
     return aud.strip()
 
