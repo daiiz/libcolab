@@ -40,24 +40,24 @@ def get_audience2(colab_name):
     cred_json = userdata.get(cred_key)
 
     # Write credential JSON to temporary file and activate service account
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.json') as tmp_file:
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_file:
         tmp_file.write(cred_json)
         key_file_path = tmp_file.name
 
-        try:
-            print(">>>>>.", cred_json[:10], cred_json[-10:])
-            run_command(
-                " ".join(
-                    [
-                        "gcloud",
-                        "auth",
-                        "activate-service-account",
-                        "--key-file={}".format(key_file_path),
-                    ]
-                )
+    try:
+        print(".........", key_file_path)
+        run_command(
+            " ".join(
+                [
+                    "gcloud",
+                    "auth",
+                    "activate-service-account",
+                    "--key-file={}".format(key_file_path),
+                ]
             )
-        finally:
-            os.unlink(key_file_path)
+        )
+    finally:
+        os.unlink(key_file_path)
 
     return aud.strip()
 
