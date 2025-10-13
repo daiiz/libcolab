@@ -1,11 +1,12 @@
+from google.colab import userdata
 import subprocess
-
 
 def run_command(command):
     completed_process = subprocess.run(command, stdout=subprocess.PIPE, shell=True)
     return completed_process.stdout.decode("utf-8")  # return output as string
 
 
+@deprecated
 def get_audience(drive_root_name, colab_name):
     base_dir = "/content/drive/MyDrive/{0}/{1}".format(drive_root_name, colab_name)
     key_file_path = "{0}/cred.json".format(base_dir)
