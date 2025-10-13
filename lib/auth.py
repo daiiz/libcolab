@@ -28,6 +28,20 @@ def get_audience(drive_root_name, colab_name):
     return aud.strip()
 
 
+def get_audience2(colab_name):
+    if not colab_name:
+        return None
+    aud_key = f"{colab_name}-client_id"
+    aud = userdata.get(aud_key)
+
+    cred_key = f"{colab_name}-cred"
+    cred_json = userdata.get(cred_key)
+
+    # TODO: activate-service-account
+
+    return aud.strip()
+
+
 def get_token(audience):
     token = run_command(
         " ".join(
