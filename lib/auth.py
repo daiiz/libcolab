@@ -45,7 +45,6 @@ def get_audience2(colab_name):
         key_file_path = tmp_file.name
 
     try:
-        print(".........", key_file_path)
         run_command(
             " ".join(
                 [
